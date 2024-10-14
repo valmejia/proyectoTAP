@@ -1,10 +1,11 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import Products from "./pages/Products/Products";
 
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
@@ -40,6 +41,15 @@ function App() {
           element={
             <IsAnon>
               <LoginPage />
+            </IsAnon>
+          }
+        />
+
+        <Route
+          path="/createProducts"
+          element={
+            <IsAnon>
+              <Products />
             </IsAnon>
           }
         />

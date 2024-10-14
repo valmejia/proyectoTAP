@@ -1,26 +1,47 @@
-const {Schema, model} = require("mongoose")
+const { Schema, model } = require("mongoose");
+//
+// const productCategory = {
+//
+//   drink: {
+//     type: String
+//   },
+//   food: {
+//     type: String
+//   }
+// };
 
 const productSchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-        },
-        product: {
-            type: String,
-            required: true,
-        },
-        amount: {
-            type: Number,
-
-        },
-
+  {
+    name: {
+      type: String,
+      required: true
     },
-    {
 
-        timestamps: true,
+    quantity: {
+      type: Number
     },
-)
+
+    cost: {
+      type: Number,
+      required: true
+    },
+    stock: {
+      type: Number,
+      required: true
+    }
+    // category: {
+    //   type: productCategory,
+    //   required: true
+    // },
+    // temperature: {}
+
+
+  },
+  {
+
+    timestamps: true
+  }
+);
 
 const Product = model("Product", productSchema);
 
