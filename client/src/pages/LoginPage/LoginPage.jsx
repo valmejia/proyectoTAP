@@ -1,10 +1,13 @@
 import "./LoginPage.css";
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import authService from "../../services/auth.service";
+import { Button, Container, FormControl, TextField, Typography } from "@mui/material";
 
 function LoginPage() {
+
+  const [usr, setUsr] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -13,6 +16,7 @@ function LoginPage() {
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
+  const handleUsr = (e) => setUsr(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
@@ -45,28 +49,106 @@ function LoginPage() {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+    <Container
+      component="main"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+      }}>
+      <Container sx={{
+        margin: 5,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+        <Typography textAlign={"center"} variant={"h3"}> Login </Typography>
+      </Container>
 
-        <button type="submit">Login</button>
-      </form>
+      <FormControl onSubmit={handleLoginSubmit}>
+
+        <Container
+          sx={{
+
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <Container sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}>
+            <TextField
+              fullWidth
+              label="Usuario"
+              variant="filled"
+              onChange={handleUsr}
+            />
+          </Container>
+
+          <Container sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}>
+            <TextField
+              fullWidth
+              label="Email"
+              variant="filled"
+              onChange={handleEmail}
+            />
+          </Container>
+
+          <Container sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}>
+            <TextField
+              fullWidth
+              label="Contrasena"
+              variant="filled"
+              onChange={handlePassword}
+            />
+          </Container>
+
+          <Container sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}>
+            <Button variant="contained">Iniciar sesion </Button>
+          </Container>
+
+          <Container sx={{
+            margin: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}>
+            <Typography textAlign={"center"} variant={"body1"}> Aun no tienes una cuenta? </Typography>
+          </Container>
+          <Container>
+            <Link to={"/signup"}> Registrate</Link>
+          </Container>
+
+
+        </Container>
+
+      </FormControl>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
-    </div>
+
+    </Container>
+
   );
 }
 
